@@ -1,0 +1,15 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.8.0  # Nutze die von dir installierte Version von Black
+    hooks:
+      - id: black
+        language_version: python3.11  # Sicherstellen, dass die richtige Python-Version verwendet wird
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.1.1  # Nutze die von dir installierte Version von Flake8
+    hooks:
+      - id: flake8
+        additional_dependencies: 
+          - mccabe==0.7.0
+          - pycodestyle==2.12.1
+          - pyflakes==3.2.0
