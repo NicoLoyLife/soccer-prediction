@@ -1,0 +1,51 @@
+# Umgebungsdateien und sensible Informationen
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtuelle Umgebung
+venv/
+ENV/
+env/
+.venv/
+.pytest_cache/
+
+# Django
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+*.log
+*.pot
+*.pyc
+.DS_Store
+*.coverage
+*.pyo
+*.pyd
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# MacOS
+.DS_Store
+
+# Docker
+*.log
+*.pid
+*.bak
+docker-compose.override.yml
+
+# VSCode
+.vscode/
+.history/
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.
