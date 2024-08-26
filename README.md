@@ -73,7 +73,16 @@ Stelle sicher, dass die folgenden Tools installiert sind:
 
    Dies erstellt und startet die Anwendung in einem Docker-Container.
 
-4. **Superuser erstellen (optional):**
+4. **Datenbankmigrationen anwenden**
+
+    Bevor du eine Superuser erstellst, führe die Migrationsbefehle aus, um sicherzustellen, dass die Datenbankstruktur korrekt eingerichtet ist:
+
+    ```bash
+    docker-compose run web python manage.py makemigrations
+    docker-compose run web python manage.py migrate
+    ```
+
+5. **Superuser erstellen (optional):**
 
    ```bash
    docker-compose run web python manage.py createsuperuser
