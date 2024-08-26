@@ -46,7 +46,7 @@ Stelle sicher, dass die folgenden Tools installiert sind:
 1. **Repository klonen:**
 
    ```bash
-   git clone https://github.com/DEIN_BENUTZERNAME/soccer-predictor.git
+   git clone https://github.com/NicoLoyLife/soccer-predictor.git
    cd soccer-predictor
    ```
 
