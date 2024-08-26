@@ -10,6 +10,8 @@
 - [Installation](#installation)
 - [Verwendung](#verwendung)
 - [Projektstruktur](#projektstruktur)
+- [Logging-Konfiguration](#logging-konfiguration)
+- [Testing-Infrastruktur](#testing-infrastruktur)
 - [Nächste Schritte](#nächste-schritte)
 - [Mitwirken](#mitwirken)
 - [Lizenz](#lizenz)
@@ -24,19 +26,19 @@
 
 ## **Technologien**
 
-- **Python 3.10**: Programmiersprache für die Entwicklung
+- **Python 3.11**: Programmiersprache für die Entwicklung
 - **Django**: Web-Framework für das Backend
 - **Django REST Framework**: Framework für die Erstellung von RESTful APIs
 - **PostgreSQL**: Datenbankmanagementsystem
 - **Docker & Docker Compose**: Containerisierung und Orchestrierung
 - **python-dotenv**: Handhabung von Umgebungsvariablen
-- **Poisson-Verteilung und andere statistische Modelle**: Für die Vorhersage von Spielergebnissen
+- **pytest & pytest-django**: Test-Frameworks für Django
 
 ## **Voraussetzungen**
 
 Stelle sicher, dass die folgenden Tools installiert sind:
 
-- [Python 3.10](https://www.python.org/)
+- [Python 3.11](https://www.python.org/)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Git](https://git-scm.com/)
@@ -93,6 +95,7 @@ soccer_predictor/       # Hauptverzeichnis des Projekts
 ├── manage.py           # Django's Management-Skript
 ├── requirements.txt    # Python-Abhängigkeiten
 ├── .env.example        # Beispiel für Umgebungsvariablen (sollte erstellt und angepasst werden)
+├── pytest.ini          # pytest-Konfigurationsdatei
 ├── soccer_predictor/   # Django-Projektverzeichnis
 │   ├── __init__.py
 │   ├── settings.py     # Django-Einstellungen (verwenden Umgebungsvariablen aus .env)
@@ -104,16 +107,57 @@ soccer_predictor/       # Hauptverzeichnis des Projekts
 │   ├── apps.py
 │   ├── models.py       # Datenmodelle
 │   ├── views.py        # API-Views
-│   └── ...             # Weitere App-Dateien
+│   └── tests/          # Testverzeichnis für die App
+│       ├── __init__.py
+│       └── test_models.py
 └── ...                 # Weitere Dateien/Verzeichnisse
 ```
 
+## **Logging-Konfiguration**
+
+Das Projekt verwendet eine einfache Logging-Konfiguration, die alle Log-Meldungen auf `DEBUG`-Level in eine Datei namens `django_debug.log` im Stammverzeichnis des Projekts speichert.
+
+Um die Logging-Konfiguration anzupassen, öffne `settings.py` und ändere die `LOGGING`-Einstellungen entsprechend deinen Anforderungen.
+
+Beispiel für die `LOGGING`-Konfiguration:
+
+```python
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django_debug.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+```
+
+## **Testing-Infrastruktur**
+
+Die Testing-Infrastruktur basiert auf `pytest` und `pytest-django`. Um die Tests auszuführen, verwende einfach den Befehl:
+
+```bash
+pytest
+```
+
+Stelle sicher, dass alle neuen Funktionen durch Tests abgedeckt werden. Beispieltests befinden sich im Verzeichnis `predictions/tests/`.
+
 ## **Nächste Schritte**
 
-- Implementierung von Datenmodellen für Teams, Spiele und Vorhersagen
+- Implementierung weiterer Datenmodelle für Teams, Spiele und Vorhersagen
 - Entwicklung und Integration der statistischen Modelle zur Vorhersage
-- Erstellung und Testen von RESTful API-Endpunkten
-- Deployment des Projekts in einer Produktionsumgebung
+- Erstellung und Testen zusätzlicher RESTful API-Endpunkte
+- Einrichtung einer CI/CD-Pipeline für automatisierte Tests und Deployments
 
 ## **Mitwirken**
 
